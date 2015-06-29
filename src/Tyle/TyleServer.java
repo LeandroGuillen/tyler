@@ -71,6 +71,8 @@ public class TyleServer extends Thread {
 		String measurementString = Short.toString(message.getMeasurement());
 		String url = baseurl + "/contextEntities/" + idString + "/attributes/temperature"; 
 		
+		System.out.println("Updating temperature of sensor with id '" + idString + "' to value " + measurementString);
+		
 		try {
 			// Send request
 			HttpPost request = new HttpPost(url);
