@@ -1,4 +1,4 @@
-package Tyle;
+package tyle;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -12,9 +12,9 @@ public class TyleTCPTestClient {
 	public static void main(String[] args) {
 		Socket socket = null;
 		try {
-			socket = new Socket("localhost", TyleServer.PORT);
+			socket = new Socket("localhost", TyleServerTCP.PORT);
 			DataOutputStream output = new DataOutputStream(socket.getOutputStream());
-			
+
 			// Pad with 0s
 			while (id.length() < 16) {
 				id = "0" + id;
@@ -23,15 +23,15 @@ public class TyleTCPTestClient {
 			// Copy bytes
 			byte[] bytesId = id.getBytes(StandardCharsets.UTF_8);
 			byte[] bytes = new byte[18];
-			for (int i = 0; i < 16; i++){
+			for (int i = 0; i < 16; i++) {
 				bytes[i] = bytesId[i];
 			}
-			
+
 			// Little endian: most significant byte is first
 			bytes[16] = (byte) (measurement >> 8);
 			bytes[17] = (byte) measurement;
-			
-			System.out.println("Sending " + bytes.length + " bytes to localhots:" + TyleServer.PORT);
+
+			System.out.println("Sending " + bytes.length + " bytes to localhots:" + TyleServerTCP.PORT);
 			output.write(bytes);
 			output.flush();
 
