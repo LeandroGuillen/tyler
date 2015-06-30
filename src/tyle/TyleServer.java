@@ -9,7 +9,9 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import tyle.protocol.Message;
 
 public abstract class TyleServer {
-
+	
+	private String baseurl = "http://leandroguillen.com:1026/v1";
+	
 	/**
 	 * Sends the measurement received from a TCP or UDP packet up to an Orion
 	 * Context Broker.
@@ -25,7 +27,6 @@ public abstract class TyleServer {
 		int statusCode = -1;
 
 		// Prepare request
-		String baseurl = "http://leandroguillen.com:1026/v1";
 		String idString = new String(message.getId());
 		String measurementString = Short.toString(message.getMeasurement());
 		String url = baseurl + "/contextEntities/" + idString + "/attributes/" + message.getMeasurementName();
